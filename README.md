@@ -58,7 +58,7 @@ The primary goal was to establish a  CI/CD pipeline with the control and securit
     *   SSH into the VM.
     *   Update system: `sudo apt update && sudo apt upgrade -y`
     *   Install dependencies: `sudo apt install -y curl openssh-server ca-certificates postfix` (Postfix for email notifications).
-    *   Add GitLab repository and install `gitlab-ce` (See thesis p. 27-29).
+    *   Add GitLab repository and install `gitlab-ce` 
 
 3.  **Configure DNS & SSL:**
     *   Point your DuckDNS subdomain (e.g., `your-gitlab.duckdns.org`) to the VM's Floating IP.
@@ -67,16 +67,16 @@ The primary goal was to establish a  CI/CD pipeline with the control and securit
     *   Obtain SSL certificate: `sudo certbot certonly --standalone -d your-gitlab.duckdns.org` (and potentially for `your-gitlab.duckdns.org:5050` if needed, though securing the registry path in `gitlab.rb` is typical).
     *   Edit GitLab configuration: `sudo nano /etc/gitlab/gitlab.rb`.
         *   Set `external_url 'https://your-gitlab.duckdns.org'`.
-        *   Configure `nginx[...]` settings for SSL certificate paths (See thesis p. 32).
+        *   Configure `nginx[...]` settings for SSL certificate paths 
         *   Set `registry_external_url 'https://your-gitlab.duckdns.org:5050'`.
-        *   Configure `registry_nginx[...]` settings for SSL (See thesis p. 33).
+        *   Configure `registry_nginx[...]` settings for SSL
     *   Reconfigure and restart GitLab: `sudo gitlab-ctl reconfigure && sudo gitlab-ctl restart`.
 
 4.  **GitLab Initial Setup:**
     *   Access `https://your-gitlab.duckdns.org` in your browser.
     *   Find the initial root password: `sudo cat /etc/gitlab/initial_root_password`.
     *   Login as `root` and change the password.
-    *   (Optional) Configure GitLab settings (e.g., disable public sign-ups, enable user account creation if needed - see thesis p. 34).
+    *   (Optional) Configure GitLab settings (e.g., disable public sign-ups, enable user account creation if needed).
 
 5.  **Install GitLab Runner:**
     *   Install the runner on the same VM (for this project setup): Follow official GitLab Runner installation docs for Linux.
@@ -90,7 +90,7 @@ The primary goal was to establish a  CI/CD pipeline with the control and securit
     *   Authenticate: `gcloud auth login`.
     *   Create a GCP project or use an existing one. Set it: `gcloud config set project YOUR_PROJECT_ID`.
     *   Enable Kubernetes Engine API in GCP Console.
-    *   Create GKE Autopilot cluster (e.g., via GCP Console or `gcloud container clusters create-auto...` - see thesis p. 41).
+    *   Create GKE Autopilot cluster (e.g., via GCP Console or `gcloud container clusters create-auto...`).
     *   Install `kubectl`: `gcloud components install kubectl`.
     *   Install GKE auth plugin: `sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin`.
     *   Get cluster credentials: `gcloud container clusters get-credentials CLUSTER_NAME --zone CLUSTER_ZONE`.
@@ -118,7 +118,7 @@ The primary goal was to establish a  CI/CD pipeline with the control and securit
 
 9.  **Configure CI/CD Variables in GitLab:**
     *   Go to your GitLab project's `Settings > CI/CD > Variables`.
-    *   Add the following variables (as defined in `.gitlab-ci.yml` and thesis p. 45-46):
+    *   Add the following variables (as defined in `.gitlab-ci.yml`):
         *   `CI_REGISTRY`: `your-gitlab.duckdns.org:5050` (Verify this - the pipeline file has it hardcoded, but good practice to have it as a variable)
         *   `DEPLOYMENT_NAME`: `my-app` (or your desired K8s deployment name)
         *   `SERVICE_NAME`: `my-app-service` (or your desired K8s service name)
