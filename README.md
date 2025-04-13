@@ -135,3 +135,13 @@ The primary goal was to establish a  CI/CD pipeline with the control and securit
     *   Commit your application code and the repository files (`.gitlab-ci.yml`, etc.).
     *   Push to the `main` branch of your self-hosted GitLab repository.
     *   Monitor the pipeline execution in the GitLab CI/CD section.
+
+## Accessing the Deployed Application
+
+Once the pipeline completes successfully:
+
+1.  Find the external IP of the LoadBalancer service:
+    ```bash
+    kubectl get service my-app-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+    ```
+2.  Open your web browser and navigate to `http://<EXTERNAL_IP>`. You should see your deployed application
