@@ -145,3 +145,10 @@ Once the pipeline completes successfully:
     kubectl get service my-app-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
     ```
 2.  Open your web browser and navigate to `http://<EXTERNAL_IP>`. You should see your deployed application
+
+## Key Configuration Files
+
+*   [`.gitlab-ci.yml`](.gitlab-ci.yml): The heart of the automation.
+*   [`app/Dockerfile`](app/Dockerfile): Defines how the application is containerized.
+*   [`kubernetes/deployment.yaml`](kubernetes/deployment.yaml): Example manifest for deploying the application pods. (this might not be case, as I am thinking of using kubectl to run the deployment, and service.)
+*   [`kubernetes/service.yaml`](kubernetes/service.yaml): Example manifest for exposing the application via a LoadBalancer.
